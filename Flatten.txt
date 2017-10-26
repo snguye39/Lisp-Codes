@@ -1,0 +1,34 @@
+;; Sang Nguyen - CS 3210 - Fall 2017
+;; ==================================
+;; flatten function: receives a list of 
+;; arbitrary dept, and returns a list containing 
+;; all the same elements, in the same order, 
+;; but now at top level
+;; lst - a list of elements
+;; atm, list, append
+
+(defun flatten (lst)
+  (cond 
+   ((null lst) nil)
+   ((atom lst)(list lst))
+   (t 
+    (append (flatten (car lst))(flatten (cdr lst))))
+  )
+)
+;; test plan for flatten:
+;; category / description       data	                  expected result
+;; ————————————————————————-------------------------------------------------
+;; empty list			'()		             NIL
+;; list with 1 element		'(1)                        (1)	
+;; list with size > 1       '(day night)                    (day night)
+;; etc      '(a b (high low) () (e (f (deep) h))))   (a b high low e f deep h)  			
+
+(setf list1 '())
+(setf list2 '(1))
+(setf list3 '(day night))
+(setf list4 '(a b (high low) () (e (f (deep) h))))
+
+(flatten list1)
+(flatten list2)
+(flatten list3)
+(flatten list4)

@@ -1,0 +1,55 @@
+;; Sang Nguyen - CS 3210 - Fall 2017
+;; ==================================
+;; countgroups function: calls a recursive function that counts the number
+;; of groups in a list. If the numbers match increase the count by 1.
+;;
+;; lst - a list of elements
+;;
+;; Assumptions:
+;; 1. No nested list
+
+
+
+(defun countgroups (lst)
+  (cond ((null lst) 0)
+        ((equal (car lst) (car (cdr lst))) 
+         (+ 1 (countgroups( helper (cdr lst)))))
+        (t (car lst) (countgroups (cdr lst)))
+  )
+)
+;; test plan for helper:
+;; category / description	 data		expected result
+;; ———————————————------------------------------------------------------
+;; empty list			'()			0
+;; list with 1 element		'(a)                    0
+;; list > size            '(cat cat b cat b c)	        1
+;; etc		      '(yes no no 23 101 yes yes yes)   2
+
+(setf list1 '())
+(setf list2 '(a))
+(setf list3 '(cat cat b cat b c))
+(setf list4 '(yes no no 23 101 yes yes yes))
+
+
+
+
+;; Sang Nguyen - CS 3210 - Fall 2017
+;; ==================================
+;; helper function: calls a recursive function to help find if there 
+;;that are more adjacent matches in the rest of the list, if match
+;;increase the group in  the countgroups.
+;; lst - a list of elements
+;; Assumptions:
+;; 1. No nested list
+
+(defun helper (lst)
+  (cond ((equal (car lst) (car (cdr lst))) (helper (cdr lst)))
+        (t (cdr lst))))
+ 
+  
+
+
+(countgroups list1)
+(countgroups list2)
+(countgroups list3)
+(countgroups list4)

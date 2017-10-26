@@ -1,0 +1,57 @@
+;; Sang Nguyen - CS 3210 - Fall 2017
+;; ==================================
+;; helper function: calls a recursive function that 
+;; counts from 1 to 20 and add 
+;; Fizz to numbers divisible by 3, Buzz to numbers
+;; divisible by 5, and FizzBuzz to 
+;; numbers divisible by both.
+;; lst - a list of numbers
+;; Assumptions:
+;; 1. No nested list
+;; 2. All list elements are integers
+;; 3. List sum will not exceed 20
+(defun helper (i)
+  (cond ((> i 20)  ())
+        ((and (= (mod i 3) 0) (= (mod i 5) 0)) 
+         (cons (list i 'FizzBuzz)(helper (+ i 1))))
+        (( = (mod i 3) 0) 
+         (cons (list i 'Fizz) (helper (+ i 1))))
+        (( = (mod i 5) 0) 
+         (cons (list i 'Buzz) (helper (+ i 1))))
+        (t (cons i (helper (+ i 1))))))
+;; test plan for helper:
+;; category / description	 data	       expected result
+;; ————————————————---------------------------------------
+;; empty list			()		  NIL
+;; list with 1 element	        (6)              (6 FIZZ)
+;; list > size one	   (1 2 3 4 5 6)    (1 2 (3 FIZZ) 4 
+;;                                              (5 BUZZ) (6 FIZZ))
+;; list with FizzBuzz          (15)              (15 FizzBuzz)
+
+
+;; Sang Nguyen - CS 3210 - Fall 2017
+;; ==================================
+;; FizzBuzz function: calls the helper class and 
+;; start the index at 1 and ends at 20
+;; Parameters: None
+;; Assumptions:
+;; 1. No nested list
+;; 2. All list elements are integers
+;; 3. List sum will not exceed 20
+
+
+(defun FizzBuzz ()
+  (helper 1))
+;; This function calls the helper to run the test cases.
+;; Helper function starts at 1 and goes to 20 and stops
+
+(setf list1 '())
+(setf list2 '(6))
+(setf list3 '(1 2 3 4 5 6))
+(setf list4 '(15))
+
+(FizzBuzz list1)
+(FizzBuzz list2)
+(FizzBuzz list3)
+(FizzBuzz list4)
+

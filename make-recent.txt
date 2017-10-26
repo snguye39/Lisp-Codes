@@ -1,0 +1,50 @@
+;; Sang Nguyen - CS 3210 - Fall 2017
+;; ==================================
+;; make-recent function: make-recent function
+;; calls the helper function to find 
+;; elements that are the same as the atm, 
+;; then passes the result to the make-recent
+;; the make recent creates a new list and puts
+;; the atm in the front of that list 
+;; with the results from the helper followed behind
+;; lst - a list of elements
+;; Assumptions:
+;; 1. The incoming list has no duplicates
+(defun make-recent (atm lst)
+  (cons atm (helper atm lst))
+)
+
+;; Sang Nguyen - CS 3210 - Fall 2017
+;; ==================================
+;; helper function: calls a helper function to
+;;  find an element in the list that 
+;; is the same as the atm, then it removes 
+;; the element, then the make-recent function
+;; makes a new list and puts the atm in the front.
+;; lst - a list of elements
+;; Assumptions:
+;; 1. The incoming list has no duplicates
+
+(defun helper (atm lst)
+  (cond ((null lst) NIL)
+        ((equal atm (car lst)) (helper atm (cdr lst))) 
+        (t (cons (car lst) (helper atm (cdr lst)))) 
+  )
+)
+
+;; test plan for helper and make-recent
+;; category / description	 data		  expected result
+;; ————————————————————————————————————————————---------------------
+;; empty list			()		     NIL
+;; list with 1 element		'a '(cat)	    (cat a)      
+;; list size > 1          'cat '(a cat came in)    (cat a came in)
+;; etc      		  'boy '(cat dog tree)    (boy cat dog tree)  
+(setf list1 '())
+(setf list2 '(cat))
+(setf list3 '(a cat came in))
+(setf list4 (cat dog tree))
+
+(match list1)
+(match list2)
+(match list3)
+(match list4)

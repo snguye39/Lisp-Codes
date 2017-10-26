@@ -1,0 +1,66 @@
+;; Sang Nguyen - CS 3210 - Fall 2017
+;; ==================================
+;; twin function: The function goes through the list and
+;; duplicates each element in the list until the list is empty 
+;;
+;; lst - a list of elements
+;; Assumptions:
+;; 1. No nested list
+(defun twin (lst) 
+  (cond (( null lst) lst)
+        (t (cons (car lst)(cons (car lst)(twin (cdr lst)))))
+  )
+)
+
+;; test plan for twin:
+;; category / description	 data	   expected result
+;; ———————————————————————------------------------------------
+;; empty list			 ()		 NIL
+;; list with 1 element		'(1)            (1 1)		
+;; list > size one             (dog 2 cat)     (dog dog 2 2 cat cat)
+;; etc 		      		(3 3 4)         (3 3 3 3 4 4)
+(setf data1 '())
+(setf data2 '(1))
+(setf data3 '(dog 2 cat))
+(setf data4 '(3 3 4))
+
+(untwin data1)
+(untwin data2)
+(untwin data3)
+(untwin data4)
+;; Sang Nguyen - CS 3210 - Fall 2017
+;; ==================================
+;; untwin function: The function goes through the list and find 
+;;adjacent equal elements and removes one of the element
+;; 
+;; lst - a list of elements
+;; Assumptions:
+;; 1. No nested list
+;; 2. No more than two identical elements will be adjacent
+
+(defun untwin (lst)
+  (cond ((null lst) nil)
+        ((equal (car lst) (car (cdr lst))) (untwin (cdr lst)))
+        (t (cons (car lst)(untwin (cdr lst))))
+  )
+)
+;; test plan for untwin:
+;; category / description	data	       expected result
+;; —————————————————————---------------------------------------------
+;; empty list			'()		    NIL
+;; list with 1 element	       '(1 1)               (1)		
+;; list > size one         '(dog dog 2 cat 7 7)     (dog 2 cat 7)
+;; etc		       (flower flower bee flower)   (flower bee flower)     
+
+
+(setf list1 '())
+(setf list2 '(1 1))
+(setf list3 '(dog dog 2 cat 7 7))
+(setf list4'(flower flower bee flower))
+
+(untwin list1)
+(untwin list2)
+(untwin list3)
+(untwin list4)
+
+

@@ -1,0 +1,44 @@
+;; Sang Nguyen - CS 3210 - Fall 2017
+;; ==================================
+;; enforce-limit function: the function compares an atm 
+;; to the elements in the list
+;; if the elements in the list is greater than the atm, 
+;; it replaces the element 
+;; with the atm.
+;; lst - a list of elements
+;; atm - if the argument is an atom return T
+;; Assumptions:
+;; 1. The limit will be an int and characters
+
+(defun enforce-limit (number lst)
+  (cond ( (null lst) nil)
+        ((and (numberp (car lst)) (> (car lst) number)) 
+         (cons number (enforce-limit number (cdr lst))))
+
+        ((listp (car lst)) 
+         (cons (enforce-limit number (car lst)) 
+               (enforece-limit number (cdr lst))))
+
+        (t (cons (car lst) (enforce-limit number (cdr lst))))
+  )
+)
+;; test plan for enforce-limit:
+;; category / description		data	       expected result
+;; ———————————————————————----------------------------------------------
+;; list0                                 ()                 NIL
+;; list1			 5 '(6 2 kitty 5 -16)	(5 2 kitty 5 -16)  
+;; list with 1 element		        '(7)                (5)	
+;; list > size one                 (1 2 7 19 2 -19)      (1 2 5 5 2 -19)
+;; etc            		  (-20 11 4 5 1 1)      (-20 5 4 5 1 1) 			
+(setf list0 '(0)) 
+(setf list1 '(21 2 3 4 kitty 5))
+(setf list2 '(7))
+(setf list3 '(1 2 7 19 2 -19))
+(setf list4 '(-20 11 4 5 1 1))
+
+(enforce-limit 5 list0)
+(enforce-limit 5 list1)
+(enforce-limit 5 list2)
+(enforce-limit 5 list3)
+(enforce-limit 5 list4)
+

@@ -1,0 +1,35 @@
+;; Sang Nguyen - CS 3210 - Fall 2017
+;; ==================================
+;; match function: count inversion function 
+;; checks the list and compares
+;; the elements in the list. If the elements
+;; are equal add one to the count.
+;; lst - a list of elements
+;; atm  - return T if argument is an atom
+
+
+(defun match (atm lst)
+  (cond ((null lst) 0 )
+        ((= atm (car lst)) (+ 1 (match atm (cdr lst))))
+        (t (match atm (cdr lst)))
+  )
+)
+
+;; test plan for match:
+;; category / description	data	       expected result
+;; ———————————————--------------------------------------------
+;; empty list		       '3 '()		   0
+;; list with 1 element	       '3 '(1)             0	
+;; list > size one            '3 '(1 2 3 2 3)      2
+;; etc		             '3 '(1 2 3 3 3 3)     4 			
+
+(setf list1 '())
+(setf list2 '(1))
+(setf list3 '(1 2 3 2 3))
+(setf list4 '(1 2 3 3 3 3))
+
+(match list1)
+(match list2)
+(match list3)
+(match list4)
+
